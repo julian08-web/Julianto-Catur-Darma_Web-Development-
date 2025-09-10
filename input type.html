@@ -4,6 +4,77 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORM INPUT + JS</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        color: #c8e6c9;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      }
+
+      form {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        margin: 30px auto;
+        box-shadow: 0 0 15px rgba(0,0,0,0.7);
+      }
+
+      input, select, textarea, button {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+      }
+
+      input, select, textarea {
+        background: #e8f5e9;
+        color: #1b5e20;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        border: 2px solid #66bb6a;
+      }
+
+      button {
+        background: #388e3c;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #2e7d32;
+        transform: scale(1.05);
+      }
+
+      #formbpjs {
+        background: rgba(255, 255, 255, 0.9);
+        color: #1b5e20;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      }
+
+      #formbpjs h2 {
+        color: #2e7d32;
+      }
+    </style>
   </head>
   <body>
     <form id="formjs">
@@ -11,13 +82,13 @@
         <h1>Form With JavaScript</h1>
         <p><input type="checkbox" id="robot" /> Anda Bukan Robot</p>
         Nama: <br />
-        <input type="text" id="Nama"><br />
+        <input type="text" id="Nama" required><br />
         Usia: <br />
-        <input type="number" id="Usia"><br />
+        <input type="number" id="Usia" required><br />
         Tanggal: <br />
-        <input type="date" id="Tggl"><br />
+        <input type="date" id="Tggl" required><br />
         Jam: <br />
-        <input type="time" id="Jam"><br />
+        <input type="time" id="Jam" required><br />
         Poli: <br />
         <select id="Poli" required>
           <option disabled selected>Silahkan Pilih Poli</option>
@@ -26,11 +97,13 @@
           <option>Poli Mata</option>
         </select><br />
         Email: <br />
-        <input type="email" id="Email"><br />
+        <input type="email" id="Email" required><br />
         Password: <br />
-        <input type="password" id="password"><br />
+        <input type="password" id="password" required><br />
+        No Handphone: <br /> 
+        <input type="tel" id="notelp" pattern="[0-9]{10,13}" placeholder="08xxxxxxxxxx" required><br />
         Alamat Rumah: <br />
-        <textarea  id="alamat" placeholder="Contoh: Jl Malaka 1 Gang 2 Rt 001 Rw 012 No 68B"></textarea> <br /><br />
+        <textarea id="alamat" placeholder="Contoh: Jl Malaka 1 Gang 2 Rt 001 Rw 012 No 68B" required></textarea><br />
         <button type="submit">Kirim</button>
       </center>
     </form>
@@ -55,12 +128,15 @@
         const jam = document.getElementById("Jam").value;
         const poli = document.getElementById("Poli").value;
         const email = document.getElementById("Email").value;
+        const notelp = document.getElementById("notelp").value;
         const password = document.getElementById("password").value;
+        const alamat = document.getElementById("alamat").value;
+
         const robotStatus = document.getElementById("robot").checked
           ? "Pendaftar Bukan Robot"
           : "Belum Diverifikasi";
-          const alamat =document.getElementById("alamat").value;
-          
+
+        const maskedPassword = "*".repeat(password.length);
 
         hasil.style.display = "block";
         hasil.innerHTML = `
@@ -71,8 +147,9 @@
           <p><b>Tanggal:</b> ${tanggal}</p>
           <p><b>Jam:</b> ${jam}</p>
           <p><b>Poli:</b> ${poli}</p>
+          <p><b>No Telp:</b> ${notelp}</p>
           <p><b>Email:</b> ${email}</p>
-          <p><b>Password:</b> ${password}</p>
+          <p><b>Password:</b> ${maskedPassword}</p>
           <p><b>Alamat Rumah:</b> ${alamat}</p>
         `;
       });
